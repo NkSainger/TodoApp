@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Todo App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_task_floating_button">add task</string>
+    <string name="task">Enter the task you want to add</string>
+    <string name="add_task">Add Task</string>
+    <string name="go_back">Go Back</string>
+</resources>
