@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TodoApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.AddUpdateTaskActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.MainActivity"
             android:exported="true">
             <intent-filter>
