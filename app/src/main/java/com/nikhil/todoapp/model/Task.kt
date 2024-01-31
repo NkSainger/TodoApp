@@ -5,12 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class Task {
+class Task(
+    @ColumnInfo(name = "task") var task: String,
+    @ColumnInfo(name = "task_status") var status: Boolean
+) {
     @PrimaryKey(autoGenerate = true)
     var id: Int ?= null
-
-    var task: String ?= null
-
-    @ColumnInfo(name = "task_status")
-    var status: Boolean ?= null
 }
