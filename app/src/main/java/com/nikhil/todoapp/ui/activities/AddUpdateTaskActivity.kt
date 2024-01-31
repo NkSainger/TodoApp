@@ -3,6 +3,7 @@ package com.nikhil.todoapp.ui.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.nikhil.todoapp.databinding.ActivityAddUpdateTaskBinding
@@ -19,6 +20,8 @@ class AddUpdateTaskActivity : AppCompatActivity() {
         binding = ActivityAddUpdateTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
         viewModal = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
@@ -32,25 +35,31 @@ class AddUpdateTaskActivity : AppCompatActivity() {
             noteID = intent.getIntExtra("id", -1)
 
             binding.apply {
-                addTaskBtn.text = "Update Note"
+                addTaskBtn.text = "Update Task"
+                textView.text = "Update"
                 addOrUpdateTaskEdTxt.setText(task)
             }
         } else {
-            binding.addTaskBtn.text = "Save Note"
+            binding.textView.text = "Add"
+            binding.addTaskBtn.text = "Save Task"
         }
 
         binding.addTaskBtn.setOnClickListener {
             val taskData = binding.addOrUpdateTaskEdTxt.text.toString()
 
             if(noteType == "Edit") {
-                if (taskData.isNotEmpty()) {
+                if(taskData.isEmpty()) {
+                    binding.addOrUpdateTaskEdTxt.error = "Enter something"
+                } else {
                     val updateTask = Task(task = taskData, status = taskStatus)
                     updateTask.id = noteID
                     viewModal.updateTask(updateTask)
                     Toast.makeText(this, "Note Updated..", Toast.LENGTH_LONG).show()
                 }
             } else {
-                if (taskData.isNotEmpty()) {
+                if(taskData.isEmpty()) {
+                    binding.addOrUpdateTaskEdTxt.error = "Enter something"
+                }else {
                     viewModal.addTask(Task(task = taskData, status = false))
                 }
             }

@@ -12,7 +12,8 @@ import java.util.ArrayList
 class TaskAdapter(
     private val context: Context,
     private val taskClickListener: TaskClickListener,
-    private val taskStatusClickListener: TaskStatusClickListener
+    private val taskStatusClickListener: TaskStatusClickListener,
+    private val taskLongClickDeleteListener: TaskLongClickDeleteListener
 ): RecyclerView.Adapter<TaskAdapter.TaskAdapterViewHolder>() {
     private val allTasks = ArrayList<Task>()
     inner class TaskAdapterViewHolder(val binding: TaskItemBinding): ViewHolder(binding.root) {
@@ -43,15 +44,16 @@ class TaskAdapter(
         holder.bind(task)
 
         holder.itemView.setOnClickListener {
-            // on below line we are calling a note click interface
-            // and we are passing a position to it.
             taskClickListener.onTaskClick(allTasks[position])
         }
 
         holder.binding.status.setOnClickListener {
-            // on below line we are calling a note click interface
-            // and we are passing a position to it.
             taskStatusClickListener.onTaskStatusClick(allTasks[position])
+        }
+
+        holder.itemView.setOnLongClickListener {
+            taskLongClickDeleteListener.onTaskLongClickDeleteListener(allTasks[position])
+            true
         }
     }
 
@@ -74,4 +76,8 @@ interface TaskClickListener {
 
 interface TaskStatusClickListener {
     fun onTaskStatusClick(task: Task)
+}
+
+interface TaskLongClickDeleteListener {
+    fun onTaskLongClickDeleteListener(task: Task)
 }

@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="@dimen/_50sdp"
         android:gravity="center_vertical">
 
         <TextView
@@ -20,8 +21,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="@dimen/_5sdp"
-            android:textSize="@dimen/_13sdp"
+            android:textSize="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:text="This is my sample task"/>
 
         <CheckBox
